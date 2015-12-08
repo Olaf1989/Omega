@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  naam: MyString
+  begindatum: 2015-12-08
+  einddatum: 2015-12-08
+  cursusduur: MyString
+  students: 
+
+two:
+  naam: MyString
+  begindatum: 2015-12-08
+  einddatum: 2015-12-08
+  cursusduur: MyString
+  students: 

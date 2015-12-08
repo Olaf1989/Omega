@@ -1,0 +1,197 @@
+*{
+  margin:0;
+}
+
+p{
+  color: black;
+}
+
+/* Menu */
+#menu{
+  float:left;
+  width:15%;
+  height:100vh;
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.menu{
+  float:left;
+  width:100%;
+  height:100vh;
+  background-color: rgba(255, 0, 0, 0.5);
+  border-radius:0px 15px 15px 0px;
+}
+
+.menu ul{
+  list-style: none;
+  margin-left:2vw;
+}
+
+.menu ul li{
+  margin-top: 1vh;
+}
+
+.menu ul li a{
+  color:black;
+  font-size:2vh;
+}
+
+.menu p{
+  font-size: 1.8vh;
+  bottom:0;
+  position: fixed;
+  margin-left: 3.5vw;
+}
+
+/* Header */
+#header{
+  background-color: black;
+  width:100vw;
+  height:15vh;
+  /*border-bottom: 1px solid rgba(255, 0, 0, 0.5);*/
+}
+
+.head{
+  width:85vw;
+  height:15vh;
+  float:right;
+  color:black;
+}
+
+.head-logo{
+  float:left;
+}
+
+.head-logo img{
+  float: left;
+  width: 7vw;
+  margin-top: 3vh;
+  margin-left:4vw;
+}
+
+.head-logo h1{
+  color:rgba(255, 0, 0, 0.5);
+  font-size:4vh;
+  margin-top:5vh;
+  margin-left: 1vw;
+  float:left;
+
+}
+
+.head-login{
+  float:right;
+  width:20vw;
+  height:15vh;
+}
+
+.head-login form{
+  margin-top:1.5vh;
+  margin-left: 8%;
+  border-radius:5px 5px;
+  width:14vw;
+  height:12vh;
+  background-color: rgba(255, 0, 0, 0.5);
+  color:black;
+  padding:5px;
+}
+
+.head-login form i{
+  color:rgba(255, 255, 255, 0.9);
+  font-size: 2vh;
+  position: fixed;
+  margin-top:0.5vh;
+  margin-left:0.5vw;
+  color:black;
+}
+
+.head-login form input{
+  margin-bottom:1vh;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.input{
+  padding-left: 1.5vw;
+  width:98%;
+  margin-left:1%;
+  margin-right:1%;
+}
+
+.head-login form a button{
+  margin-top:;
+  width: 100px;
+}
+
+.submit-button{
+  float:right;
+  width: 80px;
+}
+
+.submit-button, .head-login form a button{
+  height: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#8c1919), to(#730000));
+  background-image: -moz-linear-gradient(top left 90deg, #8c1919 0%, #730000 100%);
+  background-image: linear-gradient(top left 90deg, #8c1919 0%, #730000 100%);
+  border-radius: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+/* Main */
+#content{
+  background-color: black;
+  background-size: cover;
+  width:85%;
+  height:85vh;
+  float:left;
+}
+
+.content{
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 90%;
+  height: auto;
+  min-height:50vh;
+  border-radius: 15px 15px;
+  margin-left: 5%;
+  padding:10px;
+  font-size: 2vh;
+  color:black;
+}
+
+.content h1, .content h2{
+  color: rgba(128, 0, 0, 1);
+}
+
+.content a{
+  color: rgba(128, 0, 0, 1);
+}
+
+.content a:hover{
+  color: rgba(102, 0, 0, 1);
+	text-shadow: 1px 0px 18px #FFFFFF;
+  text-decoration: none;
+}
+
+/* Courses */
+.index-title{
+  float:left;
+}
+
+.index-new{
+  float:right;
+  margin-top:2.8vh;
+}
+
+.index-table{
+  margin-left:auto;
+  margin-right: auto;
+  clear:both;
+}
+
+.index-table th, .index-table td{
+  padding:10px;
+  text-align: center;
+}

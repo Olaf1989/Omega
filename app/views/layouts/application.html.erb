@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css" charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <!-- Scripts -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- Page title -->
+    <meta charset="utf-8">
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+
+    <title>Omega Opleidingscentrum</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <!-- Menu -->
+    <section id="menu">
+      <section class="menu">
+        <ul>
+          <li><a href="http://localhost:3000">Home</a></li>
+          <li><a href="../courses">Cursussen</a></li>
+          <li><a href="#">Test</a></li>
+          <li><a href="#">Test</a></li>
+        </ul>
+        <p>© <%= Date.today.year %> Omega</p>
+      </section>
+    </section>
+
+
+    <!-- Header -->
+    <section id="header">
+      <section class="head">
+        <section class="head-logo">
+          <!-- Logo image -->
+          <img src="/assets/logo.png" />
+          <!-- page title -->
+          <h1>Opleidingscentrum Omega</h1>
+        </section>
+        <section class="head-login">
+          <!-- Login form -->
+          <form class="" action="" method="post">
+
+                <i class="fa fa-user"></i>
+                <input class="input" type="text" name="name" value="" placeholder="Naam">
+
+                <BR /><i class="fa fa-key"></i>
+                <input class="input" type="text" name="password" value="" placeholder="Wachtwoord">
+
+                <a href="#" taraget="_self"><button type="button" name="button">Registreren</button></a>
+                <input class="submit-button" type="button" name="name" value="Inloggen">
+
+
+          </form>
+
+        </section>
+      </section>
+    </section>
+
+
+
+    <!-- Main -->
+    <section id="content">
+      <section class="content">
+        <!-- Content depending on the page -->
+        <%= yield %>
+      </section>
+    </section>
+
+</body>
+</html>
