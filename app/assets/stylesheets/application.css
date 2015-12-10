@@ -6,6 +6,16 @@ p{
   color: black;
 }
 
+#alert, #notice{
+  color:rgba(255, 255, 255, 1);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  background-color: rgba(128, 0, 0, 1);
+  width:100%;
+  text-align: center;
+  border-radius: 15px 15px;
+}
+
 /* Menu */
 #menu{
   float:left;
@@ -80,53 +90,13 @@ p{
 
 .head-login{
   float:right;
-  width:20vw;
-  height:15vh;
+  width:10vw;
+  height:3vh;
+  margin-right:4.4vw;
+  margin-top:5vh;
 }
 
-.head-login form{
-  margin-top:1.5vh;
-  margin-left: 8%;
-  border-radius:5px 5px;
-  width:14vw;
-  height:12vh;
-  background-color: rgba(255, 0, 0, 0.5);
-  color:black;
-  padding:5px;
-}
-
-.head-login form i{
-  color:rgba(255, 255, 255, 0.9);
-  font-size: 2vh;
-  position: fixed;
-  margin-top:0.5vh;
-  margin-left:0.5vw;
-  color:black;
-}
-
-.head-login form input{
-  margin-bottom:1vh;
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.input{
-  padding-left: 1.5vw;
-  width:98%;
-  margin-left:1%;
-  margin-right:1%;
-}
-
-.head-login form a button{
-  margin-top:;
-  width: 100px;
-}
-
-.submit-button{
-  float:right;
-  width: 80px;
-}
-
-.submit-button, .head-login form a button{
+.head-login button{
   height: 30px;
   font-size: 14px;
   font-weight: bold;
@@ -138,6 +108,15 @@ p{
   border: 1px solid rgba(0, 0, 0, 0.5);
   box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   cursor: pointer;
+}
+
+.head-login a{
+  color:rgba(255, 255, 255, 0.9);
+  font-size: 2vh;
+}
+
+.head-login a:hover{
+  color:rgba(255, 0, 0, 0.5);
 }
 
 /* Main */

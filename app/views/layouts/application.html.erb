@@ -45,30 +45,25 @@
           <h1>Opleidingscentrum Omega</h1>
         </section>
         <section class="head-login">
+
           <!-- Login form -->
-          <form class="" action="" method="post">
-
-                <i class="fa fa-user"></i>
-                <input class="input" type="text" name="name" value="" placeholder="Naam">
-
-                <BR /><i class="fa fa-key"></i>
-                <input class="input" type="text" name="password" value="" placeholder="Wachtwoord">
-
-                <a href="#" taraget="_self"><button type="button" name="button">Registreren</button></a>
-                <input class="submit-button" type="button" name="name" value="Inloggen">
-
-
-          </form>
-
+          <% if current_user %>
+          <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
+          <%= link_to "Logout", :logout, method: :post %>
+          <% else %>
+          <%= link_to "Register", new_user_path %>
+          <%= link_to "Login", :login %>
+          <% end %>
         </section>
       </section>
     </section>
 
-
-
     <!-- Main -->
     <section id="content">
       <section class="content">
+        <p id="notice"><%= flash[:notice] %></p>
+        <p id="alert"><%= flash[:alert] %></p>
+
         <!-- Content depending on the page -->
         <%= yield %>
       </section>
