@@ -4,6 +4,8 @@
 
 p{
   color: black;
+  padding:0;
+  margin:0;
 }
 
 #alert, #notice{
@@ -14,6 +16,17 @@ p{
   width:100%;
   text-align: center;
   border-radius: 15px 15px;
+}
+
+.beheerder{
+  text-shadow:2px 2px 2px rgba(255, 0, 0, 0.5);
+}
+
+.medewerker{
+  text-shadow:2px 2px 2px rgba(255, 255, 0, 0.5);
+}
+
+.cursist{
 }
 
 /* Menu */
@@ -90,24 +103,15 @@ p{
 
 .head-login{
   float:right;
-  width:10vw;
   height:3vh;
   margin-right:4.4vw;
   margin-top:5vh;
+  color:white;
+  font-size: 2vh;
 }
 
-.head-login button{
-  height: 30px;
-  font-size: 14px;
-  font-weight: bold;
-  color: rgba(255, 255, 255, 0.9);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#8c1919), to(#730000));
-  background-image: -moz-linear-gradient(top left 90deg, #8c1919 0%, #730000 100%);
-  background-image: linear-gradient(top left 90deg, #8c1919 0%, #730000 100%);
-  border-radius: 30px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  cursor: pointer;
+.head-login p{
+  color:rgba(255, 0, 0, 0.5);
 }
 
 .head-login a{
@@ -154,6 +158,18 @@ p{
   text-decoration: none;
 }
 
+.index-image{
+  margin-left:10vw;
+  box-shadow: 10px 10px 18px #000000;
+  border-radius:15px;
+  transition: 1s;
+}
+
+.index-image:hover{
+  height:37vh;
+  transition: 1s;
+}
+
 /* Courses */
 .index-title{
   float:left;
@@ -166,11 +182,47 @@ p{
 
 .index-table{
   margin-left:auto;
-  margin-right: auto;
+  margin-right:auto;
   clear:both;
 }
 
 .index-table th, .index-table td{
   padding:10px;
   text-align: center;
+}
+
+/* Contact */
+#contact-left, #contact-right{
+  width:30%;
+  float:left;
+}
+
+#contact-left{
+  margin-left:2%;
+}
+
+#contact-left td, #contact-right td{
+  padding-top:5px;
+}
+
+.contact-value{
+  margin-left:-400px;
+  float:left;
+  position: fixed;
+}
+
+#map{
+  margin-top:12%;
+  height: 25vh;
+  width:101.3%;
+  margin-left:-0.5vw;
+  margin-bottom:-5vh;
+  opacity:0.4;
+  border-radius:0px 0px 15px 15px;
+  transition: 1s;
+}
+
+#map:hover{
+  opacity: 0.8;
+  transition: 1s;
 }

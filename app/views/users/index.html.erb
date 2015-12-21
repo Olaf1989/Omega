@@ -1,9 +1,14 @@
-<h1>Listing Users</h1>
+<h2 class="index-title">Overzicht van gebruikers</h2>
+<p class="index-new"><%= link_to 'Nieuwe gebruiker', new_user_path %></p>
 
-<table>
+<table class="index-table">
   <thead>
     <tr>
       <th>Email</th>
+      <th>Voornaam</th>
+      <th>Tussenvoegsel</th>
+      <th>Achternaam</th>
+      <th>Rol</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,14 +17,25 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.email %></td>
+        <td><%= user.voornaam %></td>
+        <td><%= user.tussenvoegsel %></td>
+        <td><%= user.achternaam %></td>
+        <td>
+          <% if user.has_role? :admin %>
+          <p class="beheerder">Beheerder</p>
+          <% elsif user.has_role? :teacher %>
+          <p class="medewerker">Medewerker</p>
+          <% else %>
+          <p class="cursist">Cursist</p>
+          <% end %>
+        </td>
         <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <% if current_user.has_role? :admin %>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New User', new_user_path %>

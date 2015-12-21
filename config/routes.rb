@@ -9,12 +9,15 @@ Rails.application.routes.draw do
   resources :courses
   resources :user_sessions
   resources :users
+  resources :pages
 
   #Root
-  root 'courses#home'
+  root 'pages#index'
+
+  get 'home', :to => 'pages#index', :as => :home
+  get 'contact', :to => 'pages#contact', :as => :contact
 
   #Get
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
-
 end

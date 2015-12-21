@@ -47,3 +47,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Login/Registration
 gem 'sorcery'
+
+# User roles
+gem "rolify"
+
+# Authorization
+gem 'cancancan', '~> 1.10'

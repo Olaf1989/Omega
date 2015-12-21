@@ -25,10 +25,10 @@
     <section id="menu">
       <section class="menu">
         <ul>
-          <li><a href="http://localhost:3000">Home</a></li>
-          <li><a href="../courses">Cursussen</a></li>
-          <li><a href="../users">Gebruikers</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><%= link_to("Home", :home) %></li>
+          <li><%= link_to("Curcussen", { action: "index", :controller => "courses"}) %></li>
+          <li><%= link_to("Gebruikers", { action: "index", :controller => "users"}) %></li>
+          <li><%= link_to("Contact", :contact) %></li>
         </ul>
         <p>© <%= Date.today.year %> Omega</p>
       </section>
@@ -42,16 +42,26 @@
           <!-- Logo image -->
           <img src="/assets/logo.png" />
           <!-- page title -->
-          <h1>Opleidingscentrum Omega</h1>
+          <h1>Opleidingsinstituut Omega</h1>
         </section>
         <section class="head-login">
 
           <!-- Login form -->
           <% if current_user %>
-          <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
+          <% if current_user.voornaam != nil %>
+          <p>
+            <%= current_user.voornaam %>
+            <% if current_user.tussenvoegsel != nil && current_user.achternaam != nil %>
+            <%= current_user.tussenvoegsel %>
+            <%= current_user.achternaam %><% end %>
+          </p>
+          <% else %>
+          <p><%= current_user.email %></p>
+          <% end %>
+          <%= link_to "Edit Profile", edit_user_path(current_user.id) %> |
           <%= link_to "Logout", :logout, method: :post %>
           <% else %>
-          <%= link_to "Register", new_user_path %>
+          <%= link_to "Register", new_user_path %> |
           <%= link_to "Login", :login %>
           <% end %>
         </section>

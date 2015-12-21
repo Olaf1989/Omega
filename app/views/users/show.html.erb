@@ -1,9 +1,40 @@
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
+<table>
+  <tr>
+    <td><strong>Rol:</strong></td>
+    <td><%= @user.role_ids %></td>
+    <% Role.all.each do |role| %>
+      <td><%= check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id) %>
+      <%= role.name %></td>
+    <% end %>
+  <tr>
+    <td><strong>Email:</strong></td>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <td><strong>Voornaam:</strong></td>
+    <td><%= @user.voornaam %></td>
+  </tr>
+  <tr>
+    <td><strong>Tussenvoegsel:</strong></td>
+    <td><%= @user.tussenvoegsel %></td>
+  </tr>
+  <tr>
+    <td><strong>Achternaam:</strong></td>
+    <td><%= @user.achternaam %></td>
+  </tr>
+  <tr>
+    <td><strong>Adres:</strong></td>
+    <td><%= @user.adres %></td>
+  </tr>
+  <tr>
+    <td><strong>Woonplaats:</strong></td>
+    <td><%= @user.woonplaats %></td>
+  </tr>
+  <tr>
+    <td><strong>Telefoon:</strong></td>
+    <td><%= @user.telefoon %></td>
+  </tr>
+</table>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
