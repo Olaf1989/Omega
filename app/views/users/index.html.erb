@@ -1,5 +1,9 @@
 <h2 class="index-title">Overzicht van gebruikers</h2>
-<p class="index-new"><%= link_to 'Nieuwe gebruiker', new_user_path %></p>
+<% if current_user != nil %>
+  <% if current_user.has_role? :admin %>
+    <p class="index-new"><%= link_to 'Nieuwe gebruiker', new_user_path %></p>
+  <% end %>
+<% end %>
 
 <table class="index-table">
   <thead>
@@ -15,7 +19,11 @@
 
   <tbody>
     <% @users.each do |user| %>
+    <% if user == current_user %>
+      <tr class="blue">
+    <% else %>
       <tr>
+    <% end %>
         <td><%= user.email %></td>
         <td><%= user.voornaam %></td>
         <td><%= user.tussenvoegsel %></td>
@@ -29,11 +37,11 @@
           <p class="cursist">Cursist</p>
           <% end %>
         </td>
-        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Bekijk', user %></td>
 
         <% if current_user.has_role? :admin %>
-          <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Wijzig', edit_user_path(user) %></td>
+          <td><%= link_to 'Verwijder', user, method: :delete, data: { confirm: 'Weet u het zeker?' } %></td>
         <% end %>
       </tr>
     <% end %>

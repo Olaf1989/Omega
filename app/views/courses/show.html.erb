@@ -18,5 +18,9 @@
   <%= @course.cursusduur %>
 </p>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<% if current_user != nil %>
+  <% if current_user.has_role? :admin or :teacher %>
+    <%= link_to 'Wijzig', edit_course_path(@course) %> |
+  <% end %>
+<% end %>
+<%= link_to 'Terug', courses_path %>

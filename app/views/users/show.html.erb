@@ -1,11 +1,20 @@
 <table>
-  <tr>
-    <td><strong>Rol:</strong></td>
-    <td><%= @user.role_ids %></td>
-    <% Role.all.each do |role| %>
-      <td><%= check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id) %>
-      <%= role.name %></td>
+  <% if current_user != nil %>
+    <% if current_user.has_role? :admin %>
+      <tr>
+        <td><strong>Rol:</strong></td>
+        <td>
+          <% if @user.has_role?(:admin) %>
+            Admin
+          <% elsif @user.has_role?(:teacher) %>
+            Medewerker
+          <% else %>
+            Cursist
+          <% end %>
+        </td>
+      </tr>
     <% end %>
+  <% end %>
   <tr>
     <td><strong>Email:</strong></td>
     <td><%= @user.email %></td>
@@ -35,6 +44,9 @@
     <td><%= @user.telefoon %></td>
   </tr>
 </table>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if current_user != nil %>
+  <% if current_user.has_role? :admin %>
+    <%= link_to 'Wijzig', edit_user_path(@user) %> |
+  <% end %>
+<% end %>
+<%= link_to 'Terug', users_path %>
