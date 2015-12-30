@@ -1,13 +1,10 @@
 <h2 class="index-title">Overzicht van cursussen</h2>
-<% if current_user != nil %>
-  <% if current_user.has_role? :admin or :teacher %>
+<% if can? :manage, Course %>
   <p class="index-new"><%= link_to 'Nieuwe cursus', new_course_path %></p>
-  <% end %>
 <% end %>
 <table class="index-table">
   <thead>
-    <tr>
-      <th>ID</th>
+    <tr id="tr">
       <th>Naam</th>
       <th>Begindatum</th>
       <th>Einddatum</th>
@@ -20,18 +17,15 @@
   <tbody>
     <% @courses.each do |course| %>
       <tr>
-        <td><%= course.id %></td>
         <td><%= course.naam %></td>
         <td><%= course.begindatum %></td>
         <td><%= course.einddatum %></td>
         <td><%= course.cursusduur %></td>
         <td>Aanmelden</td>
         <td><%= link_to 'Bekijk', course %></td>
-        <% if current_user != nil %>
-          <% if current_user.has_role? :admin or :teacher %>
-            <td><%= link_to 'Wijzig', edit_course_path(course) %></td>
-            <td><%= link_to 'Verwijder', course, method: :delete, data: { confirm: 'Weet u het zeker?' } %></td>
-          <% end %>
+        <% if can? :manage, Course %>
+          <td><%= link_to 'Wijzig', edit_course_path(course) %></td>
+          <td><%= link_to 'Verwijder', course, method: :delete, data: { confirm: 'Weet u het zeker?' } %></td>
         <% end %>
       </tr>
     <% end %>

@@ -16,6 +16,7 @@ p{
   width:100%;
   text-align: center;
   border-radius: 15px 15px;
+  display:none;
 }
 
 .beheerder{
@@ -24,9 +25,6 @@ p{
 
 .medewerker{
   text-shadow:2px 2px 2px rgba(255, 255, 0, 0.5);
-}
-
-.cursist{
 }
 
 /* Menu */
@@ -45,18 +43,24 @@ p{
   border-radius:0px 15px 15px 0px;
 }
 
-.menu ul{
-  list-style: none;
-  margin-left:2vw;
+ul .list-group{
+  background-color:yellow;
+  border: none;
 }
 
-.menu ul li{
-  margin-top: 1vh;
+.list-group-item{
+  background-color: #808080;
+  font-size:1.8vh;
+  color: black;
 }
 
-.menu ul li a{
-  color:black;
-  font-size:2vh;
+.list-group-item a{
+  color: #800000;
+  margin-left:1%;
+}
+
+.list-group-item a:hover{
+  text-shadow: 1px 0px 18px #FFFFFF;
 }
 
 .menu p{
@@ -78,8 +82,9 @@ p{
   width:85vw;
   height:15vh;
   float:right;
-  color:black;
 }
+
+
 
 .head-logo{
   float:left;
@@ -106,22 +111,63 @@ p{
   height:3vh;
   margin-right:4.4vw;
   margin-top:5vh;
+  font-size: 2vh;
+}
+
+
+#main-button{
+  background-color:rgba(128, 0, 0, 1);
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+#button-part{
+  background-color:rgba(128, 0, 0, 1);
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+#button-part, #button-part a{
+  font-size: 2vh;
   color:white;
-  font-size: 2vh;
 }
 
-.head-login p{
-  color:rgba(255, 0, 0, 0.5);
+#main-button a:hover{
+  text-decoration: none;
+  text-shadow: 1px 0px 18px #FFFFFF;
+  color:rgba(255, 255, 255, 0.5);
 }
 
-.head-login a{
-  color:rgba(255, 255, 255, 0.9);
-  font-size: 2vh;
+#dropdown-test, #dropdown-test a{
+  color:black;
 }
 
-.head-login a:hover{
-  color:rgba(255, 0, 0, 0.5);
+#dropdown-test{
+  width:100%;
 }
+
+#dropdown-test a{
+  font-size: 1.8vh;
+
+}
+
+#dropdown-test a:hover{
+  color:black;
+
+}
+
+#main-button li{
+  text-align: center;
+
+}
+
+#main-button li:hover{
+background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+
+
 
 /* Main */
 #content{
@@ -133,7 +179,7 @@ p{
 }
 
 .content{
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.5);
   width: 90%;
   height: auto;
   min-height:50vh;
@@ -170,14 +216,6 @@ p{
   transition: 1s;
 }
 
-tr:hover{
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-thead tr:hover{
-  background-color: #666666;
-}
-
 /* Courses */
 .index-title{
   float:left;
@@ -199,6 +237,10 @@ thead tr:hover{
   text-align: center;
 }
 
+.index-table tbody tr:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .blue{
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0px 2px rgba(0, 0, 0, 0.2);
@@ -210,6 +252,10 @@ td i p{
 }
 
 /* Contact */
+.contact-section{
+  margin-left:30%;
+}
+
 #contact-left, #contact-right{
   width:30%;
   float:left;
@@ -223,10 +269,8 @@ td i p{
   padding-top:5px;
 }
 
-.contact-value{
-  margin-left:-400px;
-  float:left;
-  position: fixed;
+#contact-right{
+  margin-left:2%;
 }
 
 #map{

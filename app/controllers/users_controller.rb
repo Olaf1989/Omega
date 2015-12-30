@@ -20,12 +20,14 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    authorize! :manage, User
   end
 
   # POST /users
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.add_role(:cursist)
     respond_to do |format|
       if @user.save
         format.html { redirect_to :home, notice: 'Gebruiker is succesvol aangemaakt.' }
@@ -40,6 +42,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    authorize! :manage, User
     @user = User.find(params[:id])
     if params[:admin] == "1"
       @user.grant(:admin)
@@ -73,6 +76,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    authorize! :manage, User
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'Gebruiker is succesvol verwijderd.' }

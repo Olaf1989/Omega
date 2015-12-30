@@ -15,16 +15,19 @@ class CoursesController < ApplicationController
 
   # GET /courses/new
   def new
+    authorize! :manage, Course
     @course = Course.new
   end
 
   # GET /courses/1/edit
   def edit
+    authorize! :manage, Course
   end
 
   # POST /courses
   # POST /courses.json
   def create
+    authorize! :manage, Course
     @course = Course.new(course_params)
     respond_to do |format|
       if @course.save
@@ -40,6 +43,7 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
+    authorize! :manage, Course
     respond_to do |format|
       if @course.update(course_params)
         format.html { redirect_to @course, notice: 'Cursus is succesvol gewijzigd.' }
@@ -54,6 +58,7 @@ class CoursesController < ApplicationController
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
+    authorize! :manage, Course
     @course.destroy
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Cursus is succesvol verwijderd.' }

@@ -7,15 +7,16 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css" charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="font-awesome-animation.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
     <!-- Scripts -->
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <!-- Page title -->
     <meta charset="utf-8">
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 
-    <title>Omega Opleidingscentrum</title>
+    <title>Omega opleidingsinstituut</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -24,16 +25,16 @@
     <!-- Menu -->
     <section id="menu">
       <section class="menu">
-        <ul>
-          <li><%= link_to("Home", :home) %></li>
-          <li><%= link_to("Curcussen", { action: "index", :controller => "courses"}) %></li>
-          <% if current_user != nil %>
-            <% if current_user.has_role? :admin or :teacher %>
-              <li><%= link_to("Gebruikers", { action: "index", :controller => "users"}) %></li>
-            <% end %>
+        <ul class="list-group">
+          <li class="list-group-item"><i class="fa fa-home fa-fw faa-pulse "></i><%= link_to("Home", :home) %></li>
+          <li class="list-group-item" href="#"><i class="fa fa-table fa-fw"></i><%= link_to("Curcussen", { action: "index", :controller => "courses"}) %></li>
+          <% if can? :manage, User %>
+            <li class="list-group-item" href="#"><i class="fa fa-users fa-fw"></i><%= link_to("Gebruikers", { action: "index", :controller => "users"}) %></li>
           <% end %>
-          <li><%= link_to("Contact", :contact) %></li>
+          <li class="list-group-item" href="#"><i class="fa fa-envelope fa-fw"></i><%= link_to("Contact", :contact) %></li>
         </ul>
+
+
         <p>© <%= Date.today.year %> Omega</p>
       </section>
     </section>
@@ -46,28 +47,45 @@
           <!-- Logo image -->
           <img src="/assets/logo.png" />
           <!-- page title -->
-          <h1>Opleidingsinstituut Omega</h1>
+          <h1>Omega opleidingsinstituut</h1>
         </section>
         <section class="head-login">
 
           <!-- Login form -->
+
+
           <% if current_user %>
-          <% if current_user.voornaam != nil %>
-          <p>
-            <%= current_user.voornaam %>
-            <% if current_user.tussenvoegsel != nil && current_user.achternaam != nil %>
-            <%= current_user.tussenvoegsel %>
-            <%= current_user.achternaam %><% end %>
-          </p>
-          <% else %>
-          <p><%= current_user.email %></p>
+            <% if current_user.voornaam != nil %>
+            <div id="main-button" class="btn-group closed">
+              <p id="button-part" class="btn btn-primary">
+                <%= link_to(current_user) do %>
+                  <i class="fa fa-user fa-fw"></i>
+                  <%= current_user.voornaam %>
+                  <% if current_user.tussenvoegsel != nil && current_user.achternaam != nil %>
+                    <%= current_user.tussenvoegsel %>
+                    <%= current_user.achternaam %>
+                  <% else %>
+                    <%= current_user.email %>
+                  <% end %>
+                <% end %>
+                <% end %>
+              </p>
+              <a id="button-part" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                <span class="fa fa-caret-down"></span></a>
+              <ul id ="dropdown-test" class="dropdown-menu">
+                <li><p id="red"><%= link_to "Wijzig profiel", edit_user_path(current_user.id) %></p></li>
+                <li><p id="red"><%= link_to "Uitloggen", :logout, method: :post %></p></li>
+              </ul>
+            </div>
+            <% else %>
+            <div id="main-button" class="btn-group closed">
+              <p id="button-part" class="btn btn-primary">
+                <%= link_to "Registreer", new_user_path %> |
+                <%= link_to "Inloggen", :login %>
+              </p>
+            </div>
           <% end %>
-          <%= link_to "Edit Profile", edit_user_path(current_user.id) %> |
-          <%= link_to "Logout", :logout, method: :post %>
-          <% else %>
-          <%= link_to "Register", new_user_path %> |
-          <%= link_to "Login", :login %>
-          <% end %>
+
         </section>
       </section>
     </section>
@@ -78,10 +96,20 @@
         <p id="notice"><%= flash[:notice] %></p>
         <p id="alert"><%= flash[:alert] %></p>
 
+        <!-- Flash animation (fadeout) -->
+        <script type="text/javascript">
+          $(function() {
+            $('#notice').delay(0).fadeIn(1500, function() {
+              $(this).delay(2500).fadeOut(1500);
+            });
+          });
+          </script>
+
         <!-- Content depending on the page -->
         <%= yield %>
       </section>
     </section>
-
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </body>
 </html>

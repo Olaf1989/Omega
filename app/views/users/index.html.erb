@@ -1,14 +1,14 @@
 <h2 class="index-title">Overzicht van gebruikers</h2>
-<% if current_user != nil %>
-  <% if current_user.has_role? :admin %>
-    <p class="index-new"><%= link_to 'Nieuwe gebruiker', new_user_path %></p>
-  <% end %>
+<% if can? :manage, User %>
+  <p class="index-new"><%= link_to 'Nieuwe gebruiker', new_user_path %></p>
 <% end %>
 
 <table class="index-table">
   <thead>
     <tr>
-      <th>Email</th>
+      <% if can? :manage, Course %>
+        <th>Email</th>
+      <% end %>
       <th>Voornaam</th>
       <th>Tussenvoegsel</th>
       <th>Achternaam</th>
@@ -24,7 +24,9 @@
     <% else %>
       <tr>
     <% end %>
-        <td><%= user.email %></td>
+      <% if can? :manage, Course %>
+          <td><%= user.email %></td>
+        <% end %>
         <td><%= user.voornaam %></td>
         <td><%= user.tussenvoegsel %></td>
         <td><%= user.achternaam %></td>
@@ -33,13 +35,13 @@
           <p class="beheerder">Beheerder</p>
           <% elsif user.has_role? :teacher %>
           <p class="medewerker">Medewerker</p>
-          <% else %>
+          <% elsif user.has_role? :cursist %>
           <p class="cursist">Cursist</p>
           <% end %>
         </td>
         <td><%= link_to 'Bekijk', user %></td>
 
-        <% if current_user.has_role? :admin %>
+        <% if can? :manage, User %>
           <td><%= link_to 'Wijzig', edit_user_path(user) %></td>
           <td><%= link_to 'Verwijder', user, method: :delete, data: { confirm: 'Weet u het zeker?' } %></td>
         <% end %>
