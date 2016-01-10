@@ -1,3 +1,4 @@
+<!-- Error messages -->
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -11,38 +12,37 @@
     </div>
   <% end %>
   <table>
-    <% if current_user != nil %>
-      <% if current_user.has_role? :admin %>
-        <fieldset>
-          <tr class="field">
-            <td><%= f.label :Rol %></td>
-              <td>
-                <%= f.label(:admin) do %>
-                  <%= hidden_field_tag(:admin, 0) %>
-                  <%= check_box_tag(:admin, 1, @user.has_role?(:admin)) %>
-                  Administrator
-                <% end %>
-              </td>
-             <tr>
-             <td><i><p>Er mag maar één rol</p><p> geselecteerd zijn<p></i></td>
-             <td>
-               <%= f.label(:teacher) do %>
-                  <%= hidden_field_tag(:teacher, 0) %>
-                  <%= check_box_tag(:teacher, 1, @user.has_role?(:teacher)) %>
-                  Medewerker
-                <% end %>
-            </tr>
-            <tr>
-            <td></td>
+    <!-- Only visible for users that can manage users! Selecting the check_box role of the user -->
+    <% if can? :manage, User %>
+      <fieldset>
+        <tr class="field">
+          <td><%= f.label :Rol %></td>
             <td>
-              <%= f.label(:cursist) do %>
-                <%= hidden_field_tag(:cursist, 0) %>
-                <%= check_box_tag(:cursist, 1, @user.has_role?(:cursist)) %>
-                Cursist
+              <%= f.label(:admin) do %>
+                <%= hidden_field_tag(:admin, 0) %>
+                <%= check_box_tag(:admin, 1, @user.has_role?(:admin)) %>
+                Administrator
               <% end %>
-            </tr>
-           </fieldset>
-        <% end %>
+            </td>
+           <tr>
+           <td><i><p>Er mag maar één rol</p><p> geselecteerd zijn<p></i></td>
+           <td>
+             <%= f.label(:teacher) do %>
+                <%= hidden_field_tag(:teacher, 0) %>
+                <%= check_box_tag(:teacher, 1, @user.has_role?(:teacher)) %>
+                Medewerker
+              <% end %>
+          </tr>
+          <tr>
+          <td></td>
+          <td>
+            <%= f.label(:cursist) do %>
+              <%= hidden_field_tag(:cursist, 0) %>
+              <%= check_box_tag(:cursist, 1, @user.has_role?(:cursist)) %>
+              Cursist
+            <% end %>
+          </tr>
+         </fieldset>
       <% end %>
 
     <tr class="field">

@@ -31,6 +31,7 @@
         <td><%= user.tussenvoegsel %></td>
         <td><%= user.achternaam %></td>
         <td>
+          <!-- Selecting the role of the user -->
           <% if user.has_role? :admin %>
           <p class="beheerder">Beheerder</p>
           <% elsif user.has_role? :teacher %>
@@ -41,6 +42,7 @@
         </td>
         <td><%= link_to 'Bekijk', user %></td>
 
+        <!-- Edit and delete buttons only visible for users that can manage users -->
         <% if can? :manage, User %>
           <td><%= link_to 'Wijzig', edit_user_path(user) %></td>
           <td><%= link_to 'Verwijder', user, method: :delete, data: { confirm: 'Weet u het zeker?' } %></td>

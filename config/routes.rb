@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   #resources :users
 
   # Resources
-  resources :courses
+  resources :courses do
+    resources :courses_users
+  end
+
   resources :user_sessions
   resources :users
   resources :pages

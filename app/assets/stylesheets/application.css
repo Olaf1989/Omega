@@ -185,7 +185,7 @@ background-color: rgba(0, 0, 0, 0.2);
   min-height:50vh;
   border-radius: 15px 15px;
   margin-left: 5%;
-  padding:10px;
+  padding: 10px 20px 10px 20px;
   font-size: 2vh;
   color:black;
 }
@@ -212,7 +212,7 @@ background-color: rgba(0, 0, 0, 0.2);
 }
 
 .index-image:hover{
-  height:37vh;
+  height:35vh;
   transition: 1s;
 }
 
@@ -274,10 +274,10 @@ td i p{
 }
 
 #map{
-  margin-top:12%;
+  margin-top:12.1%;
   height: 25vh;
-  width:101.3%;
-  margin-left:-0.5vw;
+  width:102.7%;
+  margin-left:-1vw;
   margin-bottom:-5vh;
   opacity:0.4;
   border-radius:0px 0px 15px 15px;

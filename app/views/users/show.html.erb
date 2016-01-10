@@ -1,9 +1,10 @@
 <table>
+  <!-- Can the current user manage users, if yes then the user role is visible -->
   <% if can? :manage, User %>
     <tr>
       <td><strong>Rol:</strong></td>
       <td>
-        <% if @user.has_role?(:admin) %>
+        <% if @user.has_role? :admin %>
           Admin
         <% elsif @user.has_role?(:teacher) %>
           Medewerker
@@ -42,7 +43,20 @@
     <td><%= @user.telefoon %></td>
   </tr>
 </table>
+
+<!-- Back path - looking if the current user can manage users -->
 <% if can? :manage, User %>
-  <%= link_to 'Wijzig', edit_user_path(@user) %> |
+  <%= link_to 'Terug', users_path %>
+<% else %>
+  <%= link_to 'Terug', :home %>
 <% end %>
-<%= link_to 'Terug', users_path %>
+
+<!-- Edit path - can the current user update or manage users -->
+<% if (can? :manage, User) || (can? :update, User) %>
+  | <%= link_to 'Wijzig', edit_user_path(@user) %>
+<% end %>
+
+<!-- Delete path - can the current user delete (himself), otherwise the delete button won't be visible for himself (normally the delete button is on the users page) -->
+<% if can? :destroy, User %>
+  | <%= link_to 'Verwijder', @user, method: :delete, data: { confirm: 'Weet u het zeker?' } %>
+<% end %>

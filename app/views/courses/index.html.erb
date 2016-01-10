@@ -9,7 +9,7 @@
       <th>Begindatum</th>
       <th>Einddatum</th>
       <th>Cursusduur</th>
-      <th></th>
+      <th>Aangemeld?</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +21,13 @@
         <td><%= course.begindatum %></td>
         <td><%= course.einddatum %></td>
         <td><%= course.cursusduur %></td>
-        <td>Aanmelden</td>
+        <% if current_user != nil %>
+          <% if current_user.courses.include?(@course) %>
+            <td>Aangemeld!</td>
+          <% else %>
+            <td><%# link_to "Join this", join_course_path %>test</td>
+          <% end %>
+        <% end %>
         <td><%= link_to 'Bekijk', course %></td>
         <% if can? :manage, Course %>
           <td><%= link_to 'Wijzig', edit_course_path(course) %></td>

@@ -18,6 +18,36 @@
   <%= @course.cursusduur %>
 </p>
 
+<% if current_user != nil %>
+   <% if current_user.courses.include?(@course) %>
+       You're already a member of this group!
+   <% else %>
+    <h3><%= link_to 'Aanmelden', current_user.courses.include?(@course) %></h3>
+   <% end %>
+<% end %>
+
+<%= form_for [@course, @course_user] do |f| %>
+  <%= f.submit "Join" %>
+<% end %>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Naam</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course.users do |u| %>
+    <tr>
+      <td><%= u.naam %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
 <% if can? :manage, Course %>
   <%= link_to 'Wijzig', edit_course_path(@course) %> |
 <% end %>

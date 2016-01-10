@@ -3,4 +3,9 @@
 <%= render 'form' %>
 
 <%= link_to 'Bekijk', @user %> |
-<%= link_to 'Terug', users_path %>
+<!-- Back path - looking if the current user can manage users -->
+<% if can? :manage, User %>
+  <%= link_to 'Terug', users_path %>
+<% else %>
+  <%= link_to 'Terug', @user %>
+<% end %>

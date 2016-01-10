@@ -1,16 +1,26 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :require_login, only: [:new, :create]
+  skip_before_action :require_login, only: [:show, :new, :create]
 
   # GET /users
   # GET /users.json
   def index
+    authorize! :manage, User
     @users = User.all
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    if current_user.has_role? :cursist or current_user.has_role? :teacher
+      if  @user = current_user
+        authorize! :update, User
+      end
+    elsif current_user.has_role? :admin
+      authorize! :manage, User
+    else
+      render file: "#{Rails.root}/public/403.html", layout: true, status: 403
+    end
   end
 
   # GET /users/new
@@ -20,7 +30,15 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    authorize! :manage, User
+    if current_user.has_role? :cursist or current_user.has_role? :teacher
+      if  @user = current_user
+        authorize! :update, User
+    end
+    elsif current_user.has_role? :admin
+      authorize! :manage, User
+    else
+      render file: "#{Rails.root}/public/403.html", layout: true, status: 403
+    end
   end
 
   # POST /users
@@ -42,26 +60,34 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    authorize! :manage, User
-    @user = User.find(params[:id])
-    if params[:admin] == "1"
-      @user.grant(:admin)
-    elsif params[:admin] == "0"
-      @user.remove_role(:admin)
-    end
+    if current_user.has_role? :cursist or current_user.has_role? :teacher
+      if  @user = current_user
+        authorize! :update, User
+      end
+    elsif current_user.has_role? :admin
+      authorize! :manage, User
 
-    if params[:teacher] == "1"
-      @user.grant(:teacher)
-    elsif params[:teacher] == "0"
-      @user.remove_role(:teacher)
-    end
+      @user = User.find(params[:id])
+      if params[:admin] == "1"
+        @user.grant(:admin)
+      elsif params[:admin] == "0"
+        @user.remove_role(:admin)
+      end
 
-    if params[:cursist] == "1"
-      @user.grant(:cursist)
-    elsif params[:cursist] == "0"
-      @user.remove_role(:cursist)
-    end
+      if params[:teacher] == "1"
+        @user.grant(:teacher)
+      elsif params[:teacher] == "0"
+        @user.remove_role(:teacher)
+      end
 
+      if params[:cursist] == "1"
+        @user.grant(:cursist)
+      elsif params[:cursist] == "0"
+        @user.remove_role(:cursist)
+      end
+    else
+      render file: "#{Rails.root}/public/403.html", layout: true, status: 403
+    end
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'Gebruiker is succesvol gewijzigd.' }
@@ -76,10 +102,16 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    authorize! :manage, User
+    if current_user.has_role? :cursist or current_user.has_role? :teacher
+      if  @user = current_user
+        authorize! :destroy, User
+      end
+    elsif current_user.has_role? :admin
+      authorize! :manage, User
+    end
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'Gebruiker is succesvol verwijderd.' }
+      format.html { redirect_to :home, notice: 'Gebruiker is succesvol verwijderd.' }
       format.json { head :no_content }
     end
   end
