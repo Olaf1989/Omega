@@ -1,3 +1,8 @@
 == README
 
 Omega project by Olaf1989.
+
+Used gems:
+-	Sorcery
+-	Rolify
+-	Cancan
