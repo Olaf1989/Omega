@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :courses_users
-  has_many :courses, :through => :courses_users
+  has_many :courses_users, :dependent => :destroy
+  has_many :courses, -> { distinct }, :through => :courses_users
 
   rolify
   authenticates_with_sorcery!

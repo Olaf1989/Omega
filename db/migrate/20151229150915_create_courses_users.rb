@@ -1,6 +1,6 @@
 class CreateCoursesUsers < ActiveRecord::Migration
   def self.up
-    create_table :courses_users, id: false do |t|
+    create_table :courses_users do |t|
     t.references :course, null: false
     t.references :user, null: false
   end

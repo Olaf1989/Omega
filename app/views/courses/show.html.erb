@@ -19,17 +19,17 @@
 </p>
 
 <% if current_user != nil %>
-   <% if current_user.courses.include?(@course) %>
-       You're already a member of this group!
-   <% else %>
-    <h3><%= link_to 'Aanmelden', current_user.courses.include?(@course) %></h3>
-   <% end %>
+  <% if current_user.courses.include?(@course) %>
+      You're already a member of this group!
+      <%= form_for [@course, @course.courses_users.build] do |f| %>
+        <%= f.submit "Afmelden" %>
+      <% end %>
+  <% else %>
+    <%= form_for [@course, @course.courses_users.build] do |f| %>
+      <%= f.submit "Aanmelden" %>
+    <% end %>
+  <% end %>
 <% end %>
-
-<%= form_for [@course, @course_user] do |f| %>
-  <%= f.submit "Join" %>
-<% end %>
-
 
 <table>
   <thead>
