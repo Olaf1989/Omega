@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20151229150915) do
     t.decimal  "prijs"
   end
 
-  create_table "courses_users", id: false, force: :cascade do |t|
+  create_table "courses_users", force: :cascade do |t|
     t.integer "course_id", null: false
     t.integer "user_id",   null: false
   end
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20151229150915) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
 
-  create_table "users_courses", id: false, force: :cascade do |t|
+  create_table "users_courses", force: :cascade do |t|
     t.integer "user_id"
     t.integer "course_id"
   end

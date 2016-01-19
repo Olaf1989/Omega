@@ -22,10 +22,10 @@
         <td><%= course.einddatum %></td>
         <td><%= course.cursusduur %></td>
         <% if current_user != nil %>
-          <% if current_user.courses.include?(@course) %>
+          <% if current_user.courses.include?(course) %>
             <td>Aangemeld!</td>
           <% else %>
-            <td><%# link_to "Join this", join_course_path %>test</td>
+            <td>Niet aangemeld</td>
           <% end %>
         <% end %>
         <td><%= link_to 'Bekijk', course %></td>
