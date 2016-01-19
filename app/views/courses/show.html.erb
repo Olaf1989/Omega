@@ -1,26 +1,28 @@
-<p>
-  <strong>Naam:</strong>
-  <%= @course.naam %>
-</p>
-
-<p>
-  <strong>Begindatum:</strong>
-  <%= @course.begindatum %>
-</p>
-
-<p>
-  <strong>Einddatum:</strong>
-  <%= @course.einddatum %>
-</p>
-
-<p>
-  <strong>Cursusduur:</strong>
-  <%= @course.cursusduur %>
-</p>
+<table class="bottom-margin">
+  <tr>
+    <td><strong>Naam:</strong></td>
+    <td><%= @course.naam %></td>
+  </tr>
+  <tr>
+    <td><strong>Begindatum:</strong></td>
+    <td><%= friendly_date @course.begindatum %></td>
+  </tr>
+  <tr>
+    <td><strong>Einddatum:</strong></td>
+    <td><%= friendly_date @course.einddatum %></td>
+  </tr>
+  <tr>
+    <td><strong>Cursusduur:</strong></td>
+    <td><%= @course.cursusduur %></td>
+  </tr>
+  <tr>
+    <td><strong>Prijs:</strong></td>
+    <td><% if @course.prijs == nil %>Onbekend<% else %>€ <%= @course.prijs %><% end %></td>
+  </tr>
+</table>
 
 <% if current_user != nil %>
   <% if current_user.courses.include?(@course) %>
-      You're already a member of this group!
       <%= form_for [@course, @course.courses_users.build] do |f| %>
         <%= f.submit "Afmelden" %>
       <% end %>
@@ -30,25 +32,33 @@
     <% end %>
   <% end %>
 <% end %>
+<br />
 
-<table>
+<% if can? :manage, Course %>
+<table class="bottom-margin index-table">
   <thead>
+    Aantal inschrijvingen: <strong><%= @course.courses_users.count %></strong>
     <tr>
       <th>Naam</th>
+      <th>E-mail</th>
+      <th>Telefoonnummer</th>
+      <th></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @course.users do |u| %>
+    <% @course.users.each do |u| %>
     <tr>
-      <td><%= u.naam %></td>
+      <td><% if u.voornaam != nil %><%= u.voornaam %>&nbsp<% end %><% if u.tussenvoegsel != nil %><%= u.tussenvoegsel %>&nbsp<% end %><% if u.achternaam != nil %><%= u.achternaam %><% end %></td>
+      <td><% if u.email != nil %><%= u.email %><% end %></td>
+      <td><% if u.telefoon != nil %><%= u.telefoon %><% end %></td>
+      <td><% if can? :manage, User %><%= link_to(u) do %>Bekijk profiel<% end %><% end %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
 
-<% if can? :manage, Course %>
+
   <%= link_to 'Wijzig', edit_course_path(@course) %> |
 <% end %>
 <%= link_to 'Terug', courses_path %>

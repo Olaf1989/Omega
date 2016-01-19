@@ -13,6 +13,7 @@ class Ability
     # Teacher / employee
     elsif user.has_role? :teacher
       can :manage, Course
+      can [:show, :edit, :update, :destroy], User, :user_id => @current_user_id
 
     # Admin
     elsif user.has_role? :admin

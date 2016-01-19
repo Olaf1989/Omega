@@ -5,29 +5,38 @@
 <table class="index-table">
   <thead>
     <tr id="tr">
+      <th></th>
       <th>Naam</th>
       <th>Begindatum</th>
       <th>Einddatum</th>
       <th>Cursusduur</th>
-      <th>Aangemeld?</th>
+      <th>Prijs</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
+
+
+
   <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.naam %></td>
-        <td><%= course.begindatum %></td>
-        <td><%= course.einddatum %></td>
-        <td><%= course.cursusduur %></td>
-        <% if current_user != nil %>
-          <% if current_user.courses.include?(course) %>
-            <td>Aangemeld!</td>
-          <% else %>
-            <td>Niet aangemeld</td>
-          <% end %>
+    <% @courses.sort { |a,b| a.naam <=> b.naam }.each do |course| %>
+    <tr>
+      <% if current_user != nil %>
+        <% if current_user.courses.include?(course) %>
+        <td><a class=info href="#"><i class="fa fa-check-square-o fa-fw"></i><span>U bent al aangemeld voor deze cursus.</span></a></td>
+        <% else %>
+          <td></td>
         <% end %>
+      <% else %>
+        <td></td>
+      <% end %>
+
+        <td style="text-align:left;"><%= course.naam %></td>
+        <td><%= friendly_date_compact course.begindatum %></td>
+        <td><%= friendly_date_compact course.einddatum %></td>
+        <td><%= course.cursusduur %></td>
+        <td><% if course.prijs == nil %>Onbekend<% else %>€ <%= course.prijs %><% end %></td>
+
         <td><%= link_to 'Bekijk', course %></td>
         <% if can? :manage, Course %>
           <td><%= link_to 'Wijzig', edit_course_path(course) %></td>

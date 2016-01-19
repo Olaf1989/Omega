@@ -44,8 +44,34 @@
   </tr>
 </table>
 
-<!-- Back path - looking if the current user can manage users -->
 <% if can? :manage, User %>
+<br />
+<h3>Cursussen</h3>
+  <table class="bottom-margin index-table">
+    <thead>
+      Aantal inschrijvingen: <strong><%= @user.courses_users.count %></strong>
+      <tr>
+        <th>Naam</th>
+        <th>Begindatum</th>
+        <th>Einddatum</th>
+        <th>Moment van aanmelding</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.courses.each do |u| %>
+      <tr>
+        <td><%= u.naam %></td>
+        <td><%= u.begindatum %></td>
+        <td><%= u.einddatum %></td>
+        <td><%= friendly_date_long u.created_at %></td>
+        <td></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<!-- Back path - looking if the current user can manage users -->
+
   <%= link_to 'Terug', users_path %>
 <% else %>
   <%= link_to 'Terug', :home %>

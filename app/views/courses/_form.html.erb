@@ -12,24 +12,32 @@
       </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :naam %><br>
-      <%= f.text_field :naam %>
-    </div>
-    <div class="field">
-      <%= f.label :begindatum %><br>
-      <%= f.date_select :begindatum %>
-    </div>
-    <div class="field">
-      <%= f.label :einddatum %><br>
-      <%= f.date_select :einddatum %>
-    </div>
-    <div class="field">
-      <%= f.label :cursusduur %><br>
-      <%= f.text_field :cursusduur %>
-    </div>
-    <div class="actions">
-      <%= f.submit "Toepassen" %>
-    </div>
+
+    <table>
+      <tr class="field">
+        <td><%= f.label :naam %></td>
+        <td><%= f.text_field :naam %></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.label :begindatum %></td>
+        <td><%= f.date_select :begindatum, order: [:day, :month, :year], prompt: { day: Date.today.day, month: Date.today.month, year: Date.today.year } %></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.label :einddatum %></td>
+        <td><%= f.date_select :einddatum, order: [:day, :month, :year], prompt: { day: Date.today.day, month: Date.today.month, year: Date.today.year } %></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.label :cursusduur %></td>
+        <td><%= f.text_field :cursusduur %></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.label :prijs %></td>
+        <td><%= f.text_field :prijs %></td>
+      </tr>
+    <tr class="actions">
+      <td></td>
+      <td><%= f.submit "Toepassen" %></td>
+    </tr>
+    </table>
   <% end %>
 <% end %>

@@ -16,6 +16,7 @@ class UsersController < ApplicationController
       if  @user = current_user
         authorize! :update, User
       end
+
     elsif current_user.has_role? :admin
       authorize! :manage, User
     else

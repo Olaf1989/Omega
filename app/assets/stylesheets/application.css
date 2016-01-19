@@ -1,290 +1,384 @@
-*{
-  margin:0;
-}
+  /* 0. General */
+  /* 1. Header */
+  /* 2. Main */
+  /* 3. Courses */
+  /* 4. Contact */
 
-p{
-  color: black;
-  padding:0;
-  margin:0;
-}
+/* 0. General */
+  *{
+    margin:0;
+    letter-spacing: 1px;
+  }
 
-#alert, #notice{
-  color:rgba(255, 255, 255, 1);
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-  font-weight: bold;
-  background-color: rgba(128, 0, 0, 1);
-  width:100%;
-  text-align: center;
-  border-radius: 15px 15px;
-  display:none;
-}
+  p{
+    color: black;
+    padding:0;
+    margin:0;
+  }
 
-.beheerder{
-  text-shadow:2px 2px 2px rgba(255, 0, 0, 0.5);
-}
+  td i p{
+    font-size:12px;
+    color: rgba(128, 0, 0, 1);
+  }
 
-.medewerker{
-  text-shadow:2px 2px 2px rgba(255, 255, 0, 0.5);
-}
+  a{
+    text-decoration: none !important;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    color: #000;
+    letter-spacing: 1px;
+    text-shadow: 0 0 1px rgba(255,255,255,0.3);
+  }
+
+  a:hover,
+  a:focus {
+    outline: none;
+  }
+
+
+  a::after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(128, 0, 0, 0.7);;
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+    -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
+    -webkit-transform: translateY(10px);
+    -moz-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+
+  a:hover::after,
+  a:focus::after {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+
+
+
+
+  #alert, #notice{
+    color:rgba(255, 255, 255, 1);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    background-color: rgba(128, 0, 0, 1);
+    width:100%;
+    text-align: center;
+    border-radius: 15px 15px;
+    display:none;
+  }
+
+  .beheerder{
+    text-shadow:2px 2px 2px rgba(255, 0, 0, 0.5);
+  }
+
+  .medewerker{
+    text-shadow:2px 2px 2px rgba(255, 255, 0, 0.5);
+  }
+
+  .bottom-margin{
+    margin-bottom: 2vh;
+  }
 
 /* Menu */
-#menu{
-  float:left;
-  width:15%;
-  height:100vh;
-  background-color: rgba(0, 0, 0, 1);
+  #menu{
+    float:left;
+    width:15%;
+    height:100vh;
+    background-color: rgba(0, 0, 0, 1);
+  }
+
+  .menu{
+    float:left;
+    width:100%;
+    height:100vh;
+    background-color: rgba(255, 0, 0, 0.5);
+    border-radius:0px 15px 15px 0px;
+  }
+
+  ul .list-group{
+    background-color:yellow;
+    border: none;
+  }
+
+  .list-group-item{
+    background-color: #808080;
+    font-size:2vh;
+    color: black;
+  }
+
+  .list-group-item a{
+    color: #800000;
+    margin-left:1%;
+  }
+
+  .menu p{
+    font-size: 1.8vh;
+    bottom:0;
+    position: fixed;
+    margin-left: 3.5vw;
+  }
+
+/* 1. Header */
+  #header{
+    background-color: black;
+    width:100vw;
+    height:15vh;
+    /*border-bottom: 1px solid rgba(255, 0, 0, 0.5);*/
+  }
+
+  .head{
+    width:85vw;
+    height:15vh;
+    float:right;
+  }
+
+  .head-logo{
+    float:left;
+  }
+
+  .head-logo img{
+    float: left;
+    width: 7vw;
+    margin-top: 3vh;
+    margin-left:4vw;
+  }
+
+  .head-logo h1{
+    color:rgba(255, 0, 0, 0.5);
+    font-size:4vh;
+    margin-top:5vh;
+    margin-left: 1vw;
+    float:left;
+  }
+
+  .head-login{
+    float:right;
+    height:3vh;
+    margin-right:4.4vw;
+    margin-top:5vh;
+    font-size: 2vh;
+  }
+
+  #main-button{
+    background-color:rgba(128, 0, 0, 1);
+    border: 1px solid white;
+    border-radius: 5px;
+  }
+
+  #button-part{
+    background-color:rgba(128, 0, 0, 1);
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+  }
+
+  #button-part, #button-part a{
+    font-size: 2vh;
+    color:white;
+  }
+
+  #dropdown-test, #dropdown-test a{
+    color:black;
+  }
+
+  #dropdown-test{
+    width:100%;
+  }
+
+  #dropdown-test a{
+    font-size: 1.8vh;
+  }
+
+  #dropdown-test a:hover{
+    color:black;
+  }
+
+  #main-button li{
+    text-align: center;
+  }
+
+  #main-button li:hover{
+  background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  /* User menu panel animation */
+  .dropdown-menu {
+      -webkit-transition: all 300ms ease-out;
+      transition: all 300ms ease-out;
+      opacity: 0;
+      display: block;
+  }
+
+  .open .dropdown-menu {
+      opacity: 1;
+  }
+
+  /* link style exception for user menu panel */
+  #button-part a::after{
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  #red a::after{
+    display:none;
+  }
+
+/* 2. Main */
+  #content{
+    background-color: black;
+    background-size: cover;
+    width:85%;
+    height:85vh;
+    float:left;
+  }
+
+  .content{
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 90%;
+    height: auto;
+    min-height:50vh;
+    border-radius: 15px 15px;
+    margin-left: 5%;
+    padding: 10px 20px 10px 20px;
+    font-size: 2vh;
+    color:black;
+  }
+
+  .content h1, .content h2{
+    color: rgba(128, 0, 0, 1);
+  }
+
+  .content a{
+    color: rgba(128, 0, 0, 1);
+  }
+
+  .content a:hover{
+    color: rgba(102, 0, 0, 1);
+  }
+
+  .index-image{
+    margin-top: 2vh;
+    margin-left:10vw;
+    box-shadow: 10px 10px 18px #000000;
+    border-radius:15px;
+    transition: 1s;
+  }
+
+  .index-image:hover{
+    height:33vh;
+    transition: 1s;
+  }
+
+/* 3. Courses */
+  .index-title{
+    float:left;
+  }
+
+  .index-new{
+    float:right;
+    margin-top:2.8vh;
+  }
+
+  .index-table{
+    margin-left:auto;
+    margin-right:auto;
+    clear:both;
+  }
+
+  .index-table th, .index-table td{
+    padding:10px;
+    text-align: center;
+  }
+
+  .index-table tbody tr{
+    transition: 500ms all !important;
+  }
+
+  .index-table tbody tr:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: 500ms all !important;
+  }
+
+  .blue{
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 2px rgba(0, 0, 0, 0.2);
+  }
+
+.signed_course{
+  #border-left:10px solid #800000;
+  transition: 1s all ease-in-out;
 }
 
-.menu{
-  float:left;
-  width:100%;
-  height:100vh;
-  background-color: rgba(255, 0, 0, 0.5);
-  border-radius:0px 15px 15px 0px;
-}
+/* 4. Contact */
+  .contact-section{
+    margin-left:30%;
+  }
 
-ul .list-group{
-  background-color:yellow;
-  border: none;
-}
+  #contact-left, #contact-right{
+    width:30%;
+    float:left;
+  }
 
-.list-group-item{
-  background-color: #808080;
-  font-size:1.8vh;
-  color: black;
-}
+  #contact-left{
+    margin-left:2%;
+  }
 
-.list-group-item a{
-  color: #800000;
-  margin-left:1%;
-}
+  #contact-left td, #contact-right td{
+    padding-top:5px;
+  }
 
-.list-group-item a:hover{
-  text-shadow: 1px 0px 18px #FFFFFF;
-}
+  #contact-right{
+    margin-left:2%;
+  }
 
-.menu p{
-  font-size: 1.8vh;
-  bottom:0;
-  position: fixed;
-  margin-left: 3.5vw;
-}
+  #map{
+    margin-top:12.1%;
+    height: 25vh;
+    width:102.7%;
+    margin-left:-1vw;
+    margin-bottom:-5vh;
+    opacity:0.4;
+    border-radius:0px 0px 15px 15px;
+    transition: 1s;
+  }
 
-/* Header */
-#header{
-  background-color: black;
-  width:100vw;
-  height:15vh;
-  /*border-bottom: 1px solid rgba(255, 0, 0, 0.5);*/
-}
+  #map:hover{
+    opacity: 0.8;
+    transition: 1s;
+  }
 
-.head{
-  width:85vw;
-  height:15vh;
-  float:right;
-}
+  a.info{
+    position:relative; /*this is the key*/
+    z-index:24;
+    color:#000;
+    text-decoration:none;
+    }
 
+  a.info:hover{
+    z-index:25;
+  }
 
+  a.info span{
+    display: none;
+  }
 
-.head-logo{
-  float:left;
-}
+  a.info:hover span{ /*the span will display just on :hover state*/
+    display:block;
+    position:absolute;
+    top:2em; left:2em; width:15em;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 1);
+    color:#000;
+    text-align: center;
+  }
 
-.head-logo img{
-  float: left;
-  width: 7vw;
-  margin-top: 3vh;
-  margin-left:4vw;
-}
-
-.head-logo h1{
-  color:rgba(255, 0, 0, 0.5);
-  font-size:4vh;
-  margin-top:5vh;
-  margin-left: 1vw;
-  float:left;
-
-}
-
-.head-login{
-  float:right;
-  height:3vh;
-  margin-right:4.4vw;
-  margin-top:5vh;
-  font-size: 2vh;
-}
-
-
-#main-button{
-  background-color:rgba(128, 0, 0, 1);
-  border: 1px solid white;
-  border-radius: 5px;
-}
-
-#button-part{
-  background-color:rgba(128, 0, 0, 1);
-  border-left: 1px solid white;
-  border-right: 1px solid white;
-}
-
-#button-part, #button-part a{
-  font-size: 2vh;
-  color:white;
-}
-
-#main-button a:hover{
-  text-decoration: none;
-  text-shadow: 1px 0px 18px #FFFFFF;
-  color:rgba(255, 255, 255, 0.5);
-}
-
-#dropdown-test, #dropdown-test a{
-  color:black;
-}
-
-#dropdown-test{
-  width:100%;
-}
-
-#dropdown-test a{
-  font-size: 1.8vh;
-
-}
-
-#dropdown-test a:hover{
-  color:black;
-
-}
-
-#main-button li{
-  text-align: center;
-
-}
-
-#main-button li:hover{
-background-color: rgba(0, 0, 0, 0.2);
-}
-
-
-
-
-
-/* Main */
-#content{
-  background-color: black;
-  background-size: cover;
-  width:85%;
-  height:85vh;
-  float:left;
-}
-
-.content{
-  background-color: rgba(255, 255, 255, 0.5);
-  width: 90%;
-  height: auto;
-  min-height:50vh;
-  border-radius: 15px 15px;
-  margin-left: 5%;
-  padding: 10px 20px 10px 20px;
-  font-size: 2vh;
-  color:black;
-}
-
-.content h1, .content h2{
-  color: rgba(128, 0, 0, 1);
-}
-
-.content a{
-  color: rgba(128, 0, 0, 1);
-}
-
-.content a:hover{
-  color: rgba(102, 0, 0, 1);
-	text-shadow: 1px 0px 18px #FFFFFF;
-  text-decoration: none;
-}
-
-.index-image{
-  margin-left:10vw;
-  box-shadow: 10px 10px 18px #000000;
-  border-radius:15px;
-  transition: 1s;
-}
-
-.index-image:hover{
-  height:35vh;
-  transition: 1s;
-}
-
-/* Courses */
-.index-title{
-  float:left;
-}
-
-.index-new{
-  float:right;
-  margin-top:2.8vh;
-}
-
-.index-table{
-  margin-left:auto;
-  margin-right:auto;
-  clear:both;
-}
-
-.index-table th, .index-table td{
-  padding:10px;
-  text-align: center;
-}
-
-.index-table tbody tr:hover{
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.blue{
-  background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 2px rgba(0, 0, 0, 0.2);
-}
-
-td i p{
-  font-size:12px;
-  color: rgba(128, 0, 0, 1);
-}
-
-/* Contact */
-.contact-section{
-  margin-left:30%;
-}
-
-#contact-left, #contact-right{
-  width:30%;
-  float:left;
-}
-
-#contact-left{
-  margin-left:2%;
-}
-
-#contact-left td, #contact-right td{
-  padding-top:5px;
-}
-
-#contact-right{
-  margin-left:2%;
-}
-
-#map{
-  margin-top:12.1%;
-  height: 25vh;
-  width:102.7%;
-  margin-left:-1vw;
-  margin-bottom:-5vh;
-  opacity:0.4;
-  border-radius:0px 0px 15px 15px;
-  transition: 1s;
-}
-
-#map:hover{
-  opacity: 0.8;
-  transition: 1s;
-}
+  a.info::after{
+    display:none;
+  }
