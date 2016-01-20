@@ -3,8 +3,8 @@
 <%= render 'form' %>
 
 <%= link_to 'Bekijk', @user %> |
-<!-- Back path - looking if the current user can manage users -->
-<% if can? :manage, User %>
+<%# Terug pad naar gebruikersoverzicht alleen voor beheerders anders terug naar eigen profiel %>
+<% if can? :manage, :all %>
   <%= link_to 'Terug', users_path %>
 <% else %>
   <%= link_to 'Terug', @user %>

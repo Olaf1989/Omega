@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
+  # Voordat er inglogd is
   skip_before_action :require_login, only: [:index, :show]
+  # Nadat er ingelogd is
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   # GET /courses

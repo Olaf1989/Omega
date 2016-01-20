@@ -4,6 +4,7 @@
     <td><%= @course.naam %></td>
   </tr>
   <tr>
+    <%# Friendly date helper -> application_helper %>
     <td><strong>Begindatum:</strong></td>
     <td><%= friendly_date @course.begindatum %></td>
   </tr>
@@ -17,15 +18,19 @@
   </tr>
   <tr>
     <td><strong>Prijs:</strong></td>
+    <%# Indien geen prijs dan "Onbekend", anders prijsweergave %>
     <td><% if @course.prijs == nil %>Onbekend<% else %>€ <%= @course.prijs %><% end %></td>
   </tr>
 </table>
 
+<%# Controle of er wel ingelogd is %>
 <% if current_user != nil %>
+<%# Als de gebruiker al is aangemeld dan afmeld knop %>
   <% if current_user.courses.include?(@course) %>
       <%= form_for [@course, @course.courses_users.build] do |f| %>
         <%= f.submit "Afmelden" %>
       <% end %>
+  <%# Als de gebruiker nog niet is aangemeld dan aanmeld knop %>
   <% else %>
     <%= form_for [@course, @course.courses_users.build] do |f| %>
       <%= f.submit "Aanmelden" %>
@@ -34,30 +39,40 @@
 <% end %>
 <br />
 
+<%# Alleen voor medewerkers & beheerders %>
 <% if can? :manage, Course %>
-<table class="bottom-margin index-table">
-  <thead>
-    Aantal inschrijvingen: <strong><%= @course.courses_users.count %></strong>
-    <tr>
-      <th>Naam</th>
-      <th>E-mail</th>
-      <th>Telefoonnummer</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @course.users.each do |u| %>
-    <tr>
-      <td><% if u.voornaam != nil %><%= u.voornaam %>&nbsp<% end %><% if u.tussenvoegsel != nil %><%= u.tussenvoegsel %>&nbsp<% end %><% if u.achternaam != nil %><%= u.achternaam %><% end %></td>
-      <td><% if u.email != nil %><%= u.email %><% end %></td>
-      <td><% if u.telefoon != nil %><%= u.telefoon %><% end %></td>
-      <td><% if can? :manage, User %><%= link_to(u) do %>Bekijk profiel<% end %><% end %></td>
-    </tr>
+  <table class="bottom-margin index-table">
+    <thead>
+      <%# Aantal cursus aanmeldingen %>
+      Aantal inschrijvingen: <strong><%= @course.courses_users.count %></strong>
+      <%# Kijken of er uberhaupt wel een curus aanmelding aanwezig is %>
+      <% if @course.courses_users.count != 0 %>
+        <tr>
+          <th>Naam</th>
+          <th>E-mail</th>
+          <th>Telefoonnummer</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%# Geeft alle cursus cursisten weer per stuk %>
+        <% @course.users.each do |u| %>
+          <tr>
+            <td><%= u.voornaam %>&nbsp
+                <% if u.tussenvoegsel != nil %>
+                  <%= u.tussenvoegsel %>&nbsp
+                <% end %>
+                <%= u.achternaam %>
+              </td>
+            <td><% if u.email != nil %><%= u.email %><% end %></td>
+            <td><% if u.telefoon != nil %><%= u.telefoon %><% end %></td>
+            <%# Bekijk profiel knop alleen zichtbaar voor beheerders %>
+            <td><% if can? :manage, User %><%= link_to(u) do %>Bekijk profiel<% end %><% end %></td>
+          </tr>
+        <% end %>
+      </tbody>
     <% end %>
-  </tbody>
-</table>
-
-
+  </table>
 
   <%= link_to 'Wijzig', edit_course_path(@course) %> |
 <% end %>

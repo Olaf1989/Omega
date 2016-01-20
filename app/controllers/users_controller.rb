@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  # Voordat er inglogd is
   skip_before_action :require_login, only: [:show, :new, :create]
+  # Nadat er inglogd is
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -68,6 +70,8 @@ class UsersController < ApplicationController
     elsif current_user.has_role? :admin
       authorize! :manage, User
 
+      # Lelijke oplossing echter werkten nettere oplossing niet voor mij.
+      # Gebruikersrollen toewijzing
       @user = User.find(params[:id])
       if params[:admin] == "1"
         @user.grant(:admin)

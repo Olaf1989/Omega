@@ -2,32 +2,32 @@
 <html>
   <head>
 
-    <!-- Meta -->
+    <%# Meta %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
 
-    <!-- Stylesheets -->
+    <%# Stylesheets %>
     <link rel="stylesheet" href="style.css" charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="font-awesome-animation.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
-    <!-- Scripts -->
+    <%# Scripts - onderaan deze pagina nog 2 scripts %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
-    <!-- Page title -->
+    <%# Page title %>
     <meta charset="utf-8">
 
-    <!-- Fonts -->
+    <%# Fonts %>
 
-    <!-- Page title -->
+    <%# Page title %>
     <title>Omega opleidingsinstituut</title>
   </head>
 
   <body>
-    <!-- Menu -->
+    <%# Menu %>
     <section id="menu">
       <section class="menu">
         <ul class="list-group">
@@ -39,38 +39,34 @@
           <li class="list-group-item" href="#"><i class="fa fa-envelope fa-fw"></i><%= link_to("Contact", :contact) %></li>
         </ul>
 
-        <!-- Menu footer  -->
+        <%# Menu footer - pakt het huidge jaartal  %>
         <p>© <%= Date.today.year %> Omega</p>
       </section>
     </section>
 
-
-    <!-- Header -->
+    <%# Header %>
     <section id="header">
       <section class="head">
         <section class="head-logo">
-          <!-- Logo image -->
+          <%# Logo image %>
           <img src="/assets/logo.png" />
-          <!-- page title -->
+          <%# page title %>
           <h1>Omega opleidingsinstituut</h1>
         </section>
         <section class="head-login">
 
-          <!-- Login form -->
+          <%# Login form %>
+          <%# Als er ingelogd is %>
           <% if current_user %>
-            <% if current_user.voornaam != nil %>
             <div id="main-button" class="btn-group closed">
               <p id="button-part" class="btn btn-primary">
                 <%= link_to(current_user) do %>
                   <i class="fa fa-user fa-fw"></i>
                   <%= current_user.voornaam %>
-                  <% if current_user.tussenvoegsel != nil && current_user.achternaam != nil %>
+                  <% if current_user.tussenvoegsel != nil %>
                     <%= current_user.tussenvoegsel %>
-                    <%= current_user.achternaam %>
-                  <% else %>
-                    <%= current_user.email %>
                   <% end %>
-                <% end %>
+                  <%= current_user.achternaam %>
                 <% end %>
               </p>
               <a id="button-part" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
@@ -80,26 +76,26 @@
                 <li><p id="red"><%= link_to "Uitloggen", :logout, method: :post %></p></li>
               </ul>
             </div>
+            <%# Als er niet ingelogd is %>
             <% else %>
-            <div id="main-button" class="btn-group closed">
-              <p id="button-part" class="btn btn-primary">
-                <%= link_to "Registreer", new_user_path %> |
-                <%= link_to "Inloggen", :login %>
-              </p>
-            </div>
-          <% end %>
-
+              <div id="main-button" class="btn-group closed">
+                <p id="button-part" class="btn btn-primary">
+                  <%= link_to "Registreer", new_user_path %> |
+                  <%= link_to "Inloggen", :login %>
+                </p>
+              </div>
+            <% end %>
+          </section>
         </section>
       </section>
-    </section>
 
-    <!-- Main -->
+    <%#- Main %>
     <section id="content">
       <section class="content">
         <p id="notice"><%= flash[:notice] %></p>
         <p id="alert"><%= flash[:alert] %></p>
 
-        <!-- Flash animation (fadeout) -->
+        <%# Flash animatie (fadeout) %>
         <script type="text/javascript">
           $(function() {
             $('#notice').delay(0).fadeIn(1500, function() {
@@ -108,11 +104,12 @@
           });
           </script>
 
-        <!-- Content depending on the page -->
+        <%# Content afhankelijk van de pagina %>
         <%= yield %>
       </section>
     </section>
+    <%# Overige scripts %>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-</body>
+  </body>
 </html>

@@ -1,33 +1,35 @@
+<%# Controle of er wel een cursus is %>
 <% if @course != nil %>
   <%= form_for(@course) do |f| %>
+    <%# Als er een fout is dan foutmelding weergave %>
     <% if @course.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
-
         <ul>
-        <% @course.errors.full_messages.each do |message| %>
+          <%# Alle foutmeldingen per foutmelding %>
+          <% @course.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
         </ul>
       </div>
     <% end %>
 
-
     <table>
       <tr class="field">
-        <td><%= f.label :naam %></td>
+        <td><%= f.label :naam %><strong>*</strong></td>
         <td><%= f.text_field :naam %></td>
       </tr>
+      <%# Datums gesorteerd op dag, maand, jaar %>
       <tr class="field">
-        <td><%= f.label :begindatum %></td>
-        <td><%= f.date_select :begindatum, order: [:day, :month, :year], prompt: { day: Date.today.day, month: Date.today.month, year: Date.today.year } %></td>
+        <td><%= f.label :begindatum %><strong>*</strong></td>
+        <td><%= f.date_select :begindatum, order: [:day, :month, :year], prompt: { day: "Dag", month: "Maand", year: "Jaar" } %></td>
       </tr>
       <tr class="field">
-        <td><%= f.label :einddatum %></td>
-        <td><%= f.date_select :einddatum, order: [:day, :month, :year], prompt: { day: Date.today.day, month: Date.today.month, year: Date.today.year } %></td>
+        <td><%= f.label :einddatum %><strong>*</strong></td>
+        <td><%= f.date_select :einddatum, order: [:day, :month, :year], prompt: { day: "Dag", month: "Maand", year: "Jaar" } %></td>
       </tr>
       <tr class="field">
-        <td><%= f.label :cursusduur %></td>
+        <td><%= f.label :cursusduur %><strong>*</strong></td>
         <td><%= f.text_field :cursusduur %></td>
       </tr>
       <tr class="field">

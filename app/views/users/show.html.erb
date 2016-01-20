@@ -1,16 +1,13 @@
 <table>
-  <!-- Can the current user manage users, if yes then the user role is visible -->
-  <% if can? :manage, User %>
+  <%# Alleen zichtbaar voor beheerders %>
+  <% if can? :manage, :all %>
     <tr>
       <td><strong>Rol:</strong></td>
       <td>
-        <% if @user.has_role? :admin %>
-          Admin
-        <% elsif @user.has_role?(:teacher) %>
-          Medewerker
-        <% elsif @user.has_role?(:cursist) %>
-          Cursist
-        <% end %>
+        <%# Rol van de gebruiker + gelijk omzetting van array naar string %>
+        <% user_role_custom = @user.roles.pluck(:name).to_s  %>
+        <%# Resultaat van hierboven strippen van blokhaken [] en aanhalingstekens" + hoofdletter van het eerste karakter %>
+        <%= user_role_custom.tr!('["]','').titleize %>
       </td>
     </tr>
   <% end %>
@@ -44,45 +41,50 @@
   </tr>
 </table>
 
-<% if can? :manage, User %>
+<%# Alleen voor beheerders %>
+<% if can? :manage, :all %>
 <br />
 <h3>Cursussen</h3>
   <table class="bottom-margin index-table">
     <thead>
+      <%# Aantal gebruiker aanmeldingen %>
       Aantal inschrijvingen: <strong><%= @user.courses_users.count %></strong>
-      <tr>
-        <th>Naam</th>
-        <th>Begindatum</th>
-        <th>Einddatum</th>
-        <th>Moment van aanmelding</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @user.courses.each do |u| %>
-      <tr>
-        <td><%= u.naam %></td>
-        <td><%= u.begindatum %></td>
-        <td><%= u.einddatum %></td>
-        <td><%= friendly_date_long u.created_at %></td>
-        <td></td>
-      </tr>
+      <%# Kijken of er uberhaupt wel een gebruiker aanmelding aanwezig is %>
+      <% if @user.courses_users.count != 0 %>
+        <tr>
+          <th>Naam</th>
+          <th>Begindatum</th>
+          <th>Einddatum</th>
+          <th>Moment van aanmelding</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%# Geeft alle gebruikers weer per stuk %>
+        <% @user.courses.each do |u| %>
+        <tr>
+          <td><%= u.naam %></td>
+          <td><%= u.begindatum %></td>
+          <td><%= u.einddatum %></td>
+          <td><%= friendly_date_long u.created_at %></td>
+          <td></td>
+        </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
 
-<!-- Back path - looking if the current user can manage users -->
-
+<%# Terug pad - kijkt of de gebruiker een beheerder is %>
   <%= link_to 'Terug', users_path %>
 <% else %>
   <%= link_to 'Terug', :home %>
 <% end %>
 
-<!-- Edit path - can the current user update or manage users -->
-<% if (can? :manage, User) || (can? :update, User) %>
+<%# Wijzig pad - kijkt of de gebruiker een beheerder is of een gebruiker kan updaten %>
+<% if (can? :manage, :all) || (can? :update, User) %>
   | <%= link_to 'Wijzig', edit_user_path(@user) %>
 <% end %>
 
-<!-- Delete path - can the current user delete (himself), otherwise the delete button won't be visible for himself (normally the delete button is on the users page) -->
+<%# Verwijder pad - kan de gebruiker zichzelf verwijderen,  normaliter is deze knop zichtbaar op de overzichtspagina van gebruikers (echter is deze niet toegankelijk voor een ieder) %>
 <% if can? :destroy, User %>
   | <%= link_to 'Verwijder', @user, method: :delete, data: { confirm: 'Weet u het zeker?' } %>
 <% end %>

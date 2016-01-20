@@ -1,4 +1,5 @@
 <h2 class="index-title">Overzicht van cursussen</h2>
+<%# Alleen voor medewerkers & beheerders %>
 <% if can? :manage, Course %>
   <p class="index-new"><%= link_to 'Nieuwe cursus', new_course_path %></p>
 <% end %>
@@ -6,7 +7,8 @@
   <thead>
     <tr id="tr">
       <th></th>
-      <th>Naam</th>
+      <th></th>
+      <th style="text-align:left;">Naam</th>
       <th>Begindatum</th>
       <th>Einddatum</th>
       <th>Cursusduur</th>
@@ -15,15 +17,15 @@
     </tr>
   </thead>
 
-
-
-
   <tbody>
+    <%# Cursussen weergegeven per cursus, gesorteerd op cursus naam %>
     <% @courses.sort { |a,b| a.naam <=> b.naam }.each do |course| %>
     <tr>
+      <%# Controle of gebruiker ingelogd is %>
       <% if current_user != nil %>
+        <%# Als de gebruiker al aangemeld is voor de cursus %>
         <% if current_user.courses.include?(course) %>
-        <td><a class=info href="#"><i class="fa fa-check-square-o fa-fw"></i><span>U bent al aangemeld voor deze cursus.</span></a></td>
+          <td><a class=info href="#"><i class="fa fa-check-square-o fa-fw"></i><span>U bent aangemeld voor deze cursus.</span></a></td>
         <% else %>
           <td></td>
         <% end %>
@@ -31,18 +33,38 @@
         <td></td>
       <% end %>
 
-        <td style="text-align:left;"><%= course.naam %></td>
-        <td><%= friendly_date_compact course.begindatum %></td>
-        <td><%= friendly_date_compact course.einddatum %></td>
-        <td><%= course.cursusduur %></td>
-        <td><% if course.prijs == nil %>Onbekend<% else %>€ <%= course.prijs %><% end %></td>
+      <%# Alleen voor medewerkers en beheerders zichtbaar %>
+      <% if can? :manage, Course %>
+        <%# Info knop met bij :hover een popup waarin het aantal aanmeldingen zichtbaar is %>
+        <td><a class=info href="#"><i class="fa fa-info fa-fw"></i><span>
+          <%# Verschillende casussen voor een nette zinsopbouw %>
+          <% if course.courses_users.count == 0 %>
+            Er zijn geen cursisten aangemeld.
+          <% elsif course.courses_users.count == 1 %>
+            Er is <%= course.courses_users.count %> cursist aangemeld.
+          <% else %>
+            Er zijn <%= course.courses_users.count %> cursisten aangemeld.
+          <% end %>
+        </span></a></td>
+      <% else %>
+        <td></td>
+      <% end %>
 
-        <td><%= link_to 'Bekijk', course %></td>
-        <% if can? :manage, Course %>
-          <td><%= link_to 'Wijzig', edit_course_path(course) %></td>
-          <td><%= link_to 'Verwijder', course, method: :delete, data: { confirm: 'Weet u het zeker?' } %></td>
-        <% end %>
-      </tr>
+      <td style="text-align:left;"><%= course.naam %></td>
+      <%# Friendly date helper compact -> application_helper %>
+      <td><%= friendly_date_compact course.begindatum %></td>
+      <td><%= friendly_date_compact course.einddatum %></td>
+      <td><%= course.cursusduur %></td>
+      <%# Indien geen prijs dan "Onbekend", anders prijsweergave %>
+      <td><% if course.prijs == nil %>Onbekend<% else %>€ <%= course.prijs %><% end %></td>
+
+      <td><%= link_to 'Bekijk', course %></td>
+      <%# Alleen voor medewerkers & beheerders %>
+      <% if can? :manage, Course %>
+        <td><%= link_to 'Wijzig', edit_course_path(course) %></td>
+        <td><%= link_to 'Verwijder', course, method: :delete, data: { confirm: 'Weet u het zeker?' } %></td>
+      <% end %>
     <% end %>
+    </tr>
   </tbody>
 </table>

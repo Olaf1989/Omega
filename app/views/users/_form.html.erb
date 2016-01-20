@@ -1,25 +1,27 @@
-<!-- Error messages -->
 <%= form_for(@user) do |f| %>
+  <%# Als er een fout is dan foutmelding weergave %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
       <ul>
-      <% @user.errors.full_messages.each do |message| %>
+        <%# Alle foutmeldingen per foutmelding %>
+        <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
+
   <table>
-    <!-- Only visible for users that can manage users! Selecting the check_box role of the user -->
-    <% if can? :manage, User %>
+    <%# Alleen zichtbaar voor beheerders. Weergave en toewijzen van een rol %>
+    <% if can? :manage, :all %>
       <fieldset>
         <tr class="field">
           <td><%= f.label :Rol %></td>
             <td>
               <%= f.label(:admin) do %>
                 <%= hidden_field_tag(:admin, 0) %>
+                <%# Als de huidige rol admin is dan is deze geselecteerd %>
                 <%= check_box_tag(:admin, 1, @user.has_role?(:admin)) %>
                 Administrator
               <% end %>
@@ -29,6 +31,7 @@
            <td>
              <%= f.label(:teacher) do %>
                 <%= hidden_field_tag(:teacher, 0) %>
+                <%# Als de huidige rol medewerker is dan is deze geselecteerd %>
                 <%= check_box_tag(:teacher, 1, @user.has_role?(:teacher)) %>
                 Medewerker
               <% end %>
@@ -38,6 +41,7 @@
           <td>
             <%= f.label(:cursist) do %>
               <%= hidden_field_tag(:cursist, 0) %>
+              <%# Als de huidige rol cursist is dan is deze geselecteerd %>
               <%= check_box_tag(:cursist, 1, @user.has_role?(:cursist)) %>
               Cursist
             <% end %>
@@ -58,7 +62,7 @@
       <td><%= f.password_field :password_confirmation %></td>
     </tr>
     <tr class="field">
-      <td><%= f.label :voornaam %></td>
+      <td><%= f.label :voornaam %><strong>*</strong></td>
       <td><%= f.text_field :voornaam %></td>
     </tr>
     <tr class="field">
@@ -66,7 +70,7 @@
       <td><%= f.text_field :tussenvoegsel %></td>
     </tr>
     <tr class="field">
-      <td><%= f.label :achternaam %></td>
+      <td><%= f.label :achternaam %><strong>*</strong></td>
       <td><%= f.text_field :achternaam %></td>
     </tr>
     <tr class="field">

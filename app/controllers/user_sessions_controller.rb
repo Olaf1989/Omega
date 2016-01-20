@@ -1,5 +1,7 @@
 class UserSessionsController < ApplicationController
+  # Voordat er inglogd is
   skip_before_action :require_login, except: [:destroy]
+  
   def new
     @user = User.new
   end
