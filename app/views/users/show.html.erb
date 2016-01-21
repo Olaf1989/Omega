@@ -62,7 +62,7 @@
         <%# Geeft alle gebruikers weer per stuk %>
         <% @user.courses.each do |u| %>
         <tr>
-          <td><%= u.naam %></td>
+          <td><%= u.course_type.name %></td>
           <td><%= u.begindatum %></td>
           <td><%= u.einddatum %></td>
           <td><%= friendly_date_long u.created_at %></td>

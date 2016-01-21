@@ -1,7 +1,11 @@
 <table class="bottom-margin">
   <tr>
-    <td><strong>Naam:</strong></td>
-    <td><%= @course.naam %></td>
+    <td><strong>Soort cursus:</strong></td>
+    <% if @course.course_type != nil %>
+      <td><%= @course.course_type.name %></td>
+    <% else %>
+    test
+    <% end %>
   </tr>
   <tr>
     <%# Friendly date helper -> application_helper %>
@@ -19,7 +23,7 @@
   <tr>
     <td><strong>Prijs:</strong></td>
     <%# Indien geen prijs dan "Onbekend", anders prijsweergave %>
-    <td><% if @course.prijs == nil %>Onbekend<% else %>€ <%= @course.prijs %><% end %></td>
+    <td><% if @course.course_type.price == nil %>Onbekend<% else %>€ <%= @course.course_type.price %><% end %></td>
   </tr>
 </table>
 

@@ -15,9 +15,10 @@
     <% end %>
 
     <table>
+
       <tr class="field">
-        <td><%= f.label :naam %><strong>*</strong></td>
-        <td><%= f.text_field :naam %></td>
+        <td><%= f.label :soort_cursus %><strong>*</strong></td>
+        <td><%= f.collection_select :course_type_id, CourseType.order(:name),:id,:name %></td>
       </tr>
       <%# Datums gesorteerd op dag, maand, jaar %>
       <tr class="field">
@@ -33,8 +34,8 @@
         <td><%= f.text_field :cursusduur %></td>
       </tr>
       <tr class="field">
-        <td><%= f.label :prijs %></td>
-        <td><%= f.text_field :prijs %></td>
+        <td><%# f.label :prijs %></td>
+        <td><%# f.text_field :prijs %></td>
       </tr>
     <tr class="actions">
       <td></td>

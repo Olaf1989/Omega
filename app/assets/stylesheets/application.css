@@ -221,11 +221,7 @@
   }
 
   /* link style exception for user menu panel */
-  #button-part a::after{
-    background: rgba(255, 255, 255, 0.7);
-  }
-
-  #red a::after{
+  #main-button a::after{
     display:none;
   }
 

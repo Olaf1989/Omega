@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  # Duplicate and unnecessary
-  #get 'user_sessions/new'
-  #get 'user_sessions/create'
-  #get 'user_sessions/destroy'
-  #resources :users
-
   # Resources
   resources :courses do
     resources :courses_users
@@ -17,10 +11,10 @@ Rails.application.routes.draw do
   #Root
   root 'pages#index'
 
+  #Get
   get 'home', :to => 'pages#index', :as => :home
   get 'contact', :to => 'pages#contact', :as => :contact
 
-  #Get
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
 end

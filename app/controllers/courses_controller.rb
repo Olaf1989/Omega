@@ -4,30 +4,22 @@ class CoursesController < ApplicationController
   # Nadat er ingelogd is
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
-  # GET /courses
-  # GET /courses.json
   def index
     @courses = Course.all
   end
 
-  # GET /courses/1
-  # GET /courses/1.json
   def show
   end
 
-  # GET /courses/new
   def new
     authorize! :manage, Course
     @course = Course.new
   end
 
-  # GET /courses/1/edit
   def edit
     authorize! :manage, Course
   end
 
-  # POST /courses
-  # POST /courses.json
   def create
     authorize! :manage, Course
     @course = Course.new(course_params)
@@ -42,8 +34,6 @@ class CoursesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /courses/1
-  # PATCH/PUT /courses/1.json
   def update
     authorize! :manage, Course
     respond_to do |format|
@@ -57,8 +47,6 @@ class CoursesController < ApplicationController
     end
   end
 
-  # DELETE /courses/1
-  # DELETE /courses/1.json
   def destroy
     authorize! :manage, Course
     @course.destroy
@@ -76,6 +64,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:naam, :begindatum, :einddatum, :cursusduur, :prijs)
+      params.require(:course).permit(:begindatum, :einddatum, :cursusduur, :course_type_id)
     end
 end
