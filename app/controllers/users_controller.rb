@@ -70,29 +70,13 @@ class UsersController < ApplicationController
     elsif current_user.has_role? :admin
       authorize! :manage, User
 
-      # Lelijke oplossing echter werkten nettere oplossing niet voor mij.
-      # Gebruikersrollen toewijzing
+      # Gebruikersrollen toggle, toggle_role begint vanaf regel 110
       @user = User.find(params[:id])
-      if params[:admin] == "1"
-        @user.grant(:admin)
-      elsif params[:admin] == "0"
-        @user.remove_role(:admin)
-      end
-
-      if params[:teacher] == "1"
-        @user.grant(:teacher)
-      elsif params[:teacher] == "0"
-        @user.remove_role(:teacher)
-      end
-
-      if params[:cursist] == "1"
-        @user.grant(:cursist)
-      elsif params[:cursist] == "0"
-        @user.remove_role(:cursist)
-      end
+      toggle_role params[:role]
     else
       render file: "#{Rails.root}/public/403.html", layout: true, status: 403
     end
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'Gebruiker is succesvol gewijzigd.' }
@@ -122,6 +106,16 @@ class UsersController < ApplicationController
   end
 
   private
+
+    # Gebruikersrollen toewijzing
+    def toggle_role(role)
+      if @user.has_role? role
+        @user.remove_role role
+      else
+        @user.roles.destroy_all if @user.roles.any?
+        @user.grant role
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

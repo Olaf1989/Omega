@@ -17,12 +17,20 @@
     <% if can? :manage, :all %>
       <fieldset>
         <tr class="field">
+          <!-- <td>Role:</td> <% Role.all.each do |role| %>
+            <td><%= radio_button_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id) %>
+            <%= role.name %></td>
+            <tr><td></td>
+          <% end %>
+        </tr> -->
+
+
           <td><%= f.label :Rol %></td>
             <td>
               <%= f.label(:admin) do %>
                 <%= hidden_field_tag(:admin, 0) %>
                 <%# Als de huidige rol admin is dan is deze geselecteerd %>
-                <%= check_box_tag(:admin, 1, @user.has_role?(:admin)) %>
+                <%= radio_button_tag(:role, :admin, @user.has_role?(:admin)) %>
                 Administrator
               <% end %>
             </td>
@@ -32,7 +40,7 @@
              <%= f.label(:teacher) do %>
                 <%= hidden_field_tag(:teacher, 0) %>
                 <%# Als de huidige rol medewerker is dan is deze geselecteerd %>
-                <%= check_box_tag(:teacher, 1, @user.has_role?(:teacher)) %>
+                <%= radio_button_tag(:role, :teacher, @user.has_role?(:teacher)) %>
                 Medewerker
               <% end %>
           </tr>
@@ -42,7 +50,7 @@
             <%= f.label(:cursist) do %>
               <%= hidden_field_tag(:cursist, 0) %>
               <%# Als de huidige rol cursist is dan is deze geselecteerd %>
-              <%= check_box_tag(:cursist, 1, @user.has_role?(:cursist)) %>
+              <%= radio_button_tag(:role, :cursist, @user.has_role?(:cursist)) %>
               Cursist
             <% end %>
           </tr>
