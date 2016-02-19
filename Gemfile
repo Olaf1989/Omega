@@ -54,3 +54,14 @@ gem "rolify"
 
 # Authorization
 gem 'cancancan', '~> 1.10'
+
+# Filters
+gem 'filterrific'
+
+# Paginatie
+gem 'will_paginate', '~> 3.0.5'
+gem 'will_paginate-bootstrap'
+
+# Datepicker
+gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-sass'

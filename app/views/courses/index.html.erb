@@ -1,77 +1,23 @@
+<%# app/views/students/index.html.erb %>
 <h2 class="index-title">Overzicht van cursussen</h2>
 <%# Alleen voor medewerkers & beheerders %>
 <% if can? :manage, Course %>
   <p class="index-new"><%= link_to 'Nieuwe cursus', new_course_path %></p>
 <% end %>
-<table class="index-table">
-  <thead>
-    <tr id="tr">
-      <th></th>
-      <th></th>
-      <th style="text-align:left;">Naam</th>
-      <th>Begindatum</th>
-      <th>Einddatum</th>
-      <th>Cursusduur</th>
-      <th>Prijs</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <%# Cursussen weergegeven per cursus, gesorteerd op cursus naam %>
+<%# Filters voor cursussen %>
+<%= form_for_filterrific @filterrific do |f| %>
+<div class="loading"><%= render_filterrific_spinner %></div>
+  <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+  <div id="filters">
+    <!-- <div class="filter"><b>Sorteer</b> <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %></div> -->
+    <div class="filter"><b>Begindatum</b> <%= f.text_field(:with_begindatum, class: 'js-datepicker') %></div>
+    <div class="filter"><b>Einddatum</b> <%= f.text_field(:with_einddatum, class: 'js-datepicker') %></div>
+    <!-- <div class="filter"><b>Zoek</b> <%= f.text_field(:search_query, class: 'filterrific-periodically-observed') %></div> -->
+    <%# add an automated spinner to your form when the list is refreshed %>
+    <div class="filter"><%= link_to('Reset filters', reset_filterrific_url,) %></div>
+  </div>
+<% end %>
 
-
-    <% @courses.each do |course| %>
-    <%# @courses.sort { |a,b| a.naam <=> b.naam }.each do |course| %>
-    <tr>
-      <%# Controle of gebruiker ingelogd is %>
-      <% if current_user != nil %>
-        <%# Als de gebruiker al aangemeld is voor de cursus %>
-        <% if current_user.courses.include?(course) %>
-          <td><a class=info href="#"><i class="fa fa-check-square-o fa-fw"></i><span>U bent aangemeld voor deze cursus.</span></a></td>
-        <% else %>
-          <td></td>
-        <% end %>
-      <% else %>
-        <td></td>
-      <% end %>
-
-      <%# Alleen voor medewerkers en beheerders zichtbaar %>
-      <% if can? :manage, Course %>
-        <%# Info knop met bij :hover een popup waarin het aantal aanmeldingen zichtbaar is %>
-        <td><a class=info href="#"><i class="fa fa-info fa-fw"></i><span>
-          <%# Verschillende casussen voor een nette zinsopbouw %>
-          <% if course.courses_users.count == 0 %>
-            Er zijn geen cursisten aangemeld.
-          <% elsif course.courses_users.count == 1 %>
-            Er is <%= course.courses_users.count %> cursist aangemeld.
-          <% else %>
-            Er zijn <%= course.courses_users.count %> cursisten aangemeld.
-          <% end %>
-        </span></a></td>
-      <% else %>
-        <td></td>
-      <% end %>
-
-      <% if course.course_type != nil %>
-        <td style="text-align:left;"><%= course.course_type.name %></td>
-      <% else %>
-      <td></td>
-      <% end %>
-      <%# Friendly date helper compact -> application_helper %>
-      <td><%= friendly_date_compact course.begindatum %></td>
-      <td><%= friendly_date_compact course.einddatum %></td>
-      <td><%= course.cursusduur %></td>
-      <%# Indien geen prijs dan "Onbekend", anders prijsweergave %>
-      <td><% if course.course_type.price == nil %>Onbekend<% else %>€ <%= course.course_type.price %><% end %></td>
-
-      <td><%= link_to 'Bekijk', course %></td>
-      <%# Alleen voor medewerkers & beheerders %>
-      <% if can? :manage, Course %>
-        <td><%= link_to 'Wijzig', edit_course_path(course) %></td>
-        <td><%= link_to 'Verwijder', course, method: :delete, data: { confirm: 'Weet u het zeker?' } %></td>
-      <% end %>
-    <% end %>
-    </tr>
-  </tbody>
-</table>
+<%# Binnenhalen van de curssusenlijst %>
+<%= render(partial: 'courses/list', locals: { courses: @courses }) %>

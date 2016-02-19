@@ -1,0 +1,7 @@
+<%# app/views/courses/index.js.erb %>
+
+<%# Indien een filter is toegepast wordt de cursuslijst opnieuw geladen %>
+<% js = escape_javascript(
+  render(partial: 'courses/list', locals: { courses: @courses })
+) %>
+$("#filterrific_results").html("<%= js %>");
